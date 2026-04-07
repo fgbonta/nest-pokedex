@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    # Usamos la versión 7.0 que es muy estable
+    image: mongo:7.0    
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root123
+      - MONGO_INITDB_DATABASE=nest-pokedex
+    volumes:
+      - ./mongo_data:/data/db
+    restart: always
+    #command: mongod --bind_ip_all --auth
