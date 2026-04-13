@@ -7,11 +7,17 @@ async function bootstrap() {
 
   // Set global prefix for all routes
   app.setGlobalPrefix('api/v2');
-  
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, // Elimina propiedades no definidas en los DTOs
-    forbidNonWhitelisted: true, // Lanza un error si se envían propiedades no definidas
-  }));
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Elimina propiedades no definidas en los DTOs
+      forbidNonWhitelisted: true, // Lanza un error si se envían propiedades no definidas
+      transform: true, // Transforma los payloads a los tipos definidos en los DTOs
+      transformOptions: {
+        enableImplicitConversion: true, // Permite la conversión implícita de tipos (ej. string a number)
+      },
+    })
+  );
 
   await app.listen(process.env.PORT ?? 3000);
 }
