@@ -19,6 +19,7 @@ export class PokemonService {
     private readonly configService: ConfigService,
   ) {
     this.defaultLimit = configService.get<number>('defaultLimit')!;
+    //console.log({ DefaultLimit: configService.get<number>('defaultLimit')! });
   }
 
   async findAll(paginationDto: PaginationDto) {
