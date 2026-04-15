@@ -2,20 +2,31 @@ import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule } from '@nestjs/config';
 
+
+import { EnvConfiguration } from './config/env.config';
 import { PokemonModule } from './pokemon/pokemon.module';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname,'..','public'),
+    ConfigModule.forRoot({
+      //envFilePath: '.env',
+      load: [EnvConfiguration],
     }),
-    MongooseModule.forRoot('mongodb://root:root123@127.0.0.1:27017/nest-pokedex?authSource=admin'),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'public'),
+    }),
+    MongooseModule.forRoot(process.env.MONGODB_URI!),
     PokemonModule,
     CommonModule,
     SeedModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    //console.log(process.env);
+  }
+}
