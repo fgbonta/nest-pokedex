@@ -21,7 +21,7 @@ import { SeedModule } from './seed/seed.module';
       rootPath: join(__dirname, '..', 'public'),
     }),
     MongooseModule.forRoot(process.env.MONGODB_URI!,{
-      dbName: 'nest-pokedex',
+      dbName: process.env.MONGODB_DB!,
     }),
     PokemonModule,
     CommonModule,
