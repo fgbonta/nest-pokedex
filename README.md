@@ -13,14 +13,15 @@ npm install
 ```
 npm i -g @nestjs/cli
 ```
-4. Levantar la DB
+
+4. Clonar el archivo __.env.template__ y renombrar __.env__
+
+5. Llenar las variables de entorno definidas en el __.env__
+
+6. Levantar la DB
 ```
 docker compose up -d
 ```
-
-5. Clonar el archivo __.env.template__ y renombrar __.env__
-
-6. Llenar las variables de entorno definidas en el __.env__
 
 7. Ejecutar la aplicación en dev:
 ```
